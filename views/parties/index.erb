@@ -1,0 +1,9 @@
+<h2>Current Parties</h2>
+<% @parties.each do |party| %>
+
+	<p> <a href="parties/<%= party.id %>"> Party number <%= party.id %> </a></p>
+	<p><%= party.people %> people</p>
+	<%= party.paid ? "<p class='green'> Paid </p>" : "<p class='red'> Not paid </p>" %>
+	<p>Arrived at <%= party.created_at %></p>
+
+<% end %>

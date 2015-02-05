@@ -1,0 +1,12 @@
+<h2><%= @party.id %></h2>
+
+<p><%= @party.people %> people</p>
+<%= @party.paid ? "<p class='green'> Paid </p>" : "<p class='red'> Not paid </p>" %>
+<p>Arrived at <%= @party.created_at %></p>
+
+<h3>Orders</h3>
+<% @orders.each do |order|	%>
+<p><%= order.name - order.price %></p>
+<p><%= %></p>
+<p><%= %></p>
+<% end %>

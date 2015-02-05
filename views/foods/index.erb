@@ -1,0 +1,51 @@
+<div class="container">
+	<h2>Today's Menu</h2>
+
+	<h3>Appetizers</h3>
+	<ul>
+	<% @foods.where("category='Appetizer'").each do |food| %>
+	    <li>
+	        <a href="/foods/<%= food.id %>"><%= food.name %></a>
+	    </li>
+	    <br>
+	    <% end %>
+	</ul>
+
+	<h3>Entrees</h3>
+	<ul>
+	<% @foods.where("category='Entree'").each do |food| %>
+	    <li>
+	        <a href="/foods/<%= food.id %>"><%= food.name %></a>
+	    </li>
+	    <br>
+	    <% end %>
+	</ul>
+
+	<h3>Desserts</h3>
+	<ul>
+	<% @foods.where("category='Dessert'").each do |food| %>
+	    <li>
+	        <a href="/foods/<%= food.id %>"><%= food.name %></a>
+	    </li>
+	    <br>
+	    <% end %>
+	</ul>
+
+	<h3>Drinks</h3>
+	<ul>
+	<% @foods.where("category='Beverage'").each do |food| %>
+	    <li>
+	        <a href="/foods/<%= food.id %>"><%= food.name %></a>
+	    </li>
+	    <br>
+	    <% end %>
+	</ul>
+
+	<div class="allergies">
+		<a href="/foods/new">Add an item to the menu</a>
+		<a href="#">All Vegetarian Items</a>
+		<a href="#">All Gluten Free Items</a>
+		<a href="#">All Nut Free Items</a>
+		<a href="#">All Dairy Free Items</a>
+	</div>
+</div>

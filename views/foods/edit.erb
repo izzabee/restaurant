@@ -1,0 +1,55 @@
+<div class="container">
+
+  <h2> Edit a Food Item </h2>
+
+  <form action="/foods" method="POST">
+
+   <fieldset>
+     <legend>Food Information</legend>
+     <label for="name">Name</label>
+     <input id="name" type="text" name="foods[name]" value="<%= @food.name %>"> 
+     <label for="category">Category</label>
+     <select id="category" name="foods[category]"> 
+         <option value="<%= @food.category %>">Appetizer</option>
+         <option value="<%= @food.category %>">Entree</option>
+         <option value="<%= @food.category %>">Dessert</option>
+         <option value="<%= @food.category %>">Beverage</option>
+     </select>
+     <label for="price">Price</label>
+     <input id="price" type="number" step="0.50" name="foods[price]" value="<%= @food.price %>"> 
+     <label for="description">Description</label>
+     <textarea id="description" name="foods[description]" value="<%= @food.description %>"></textarea>
+   </fieldset>
+
+   <br>
+
+   <fieldset>
+    <legend>Dietary Restrictions</legend>
+
+     <input name="foods[vegetarian]" type="hidden" value="false" />
+     <input id="veggie" name="food[vegetarian]" type="checkbox" value="<%= @food.vegetarian %>" />
+     <label for="veggie">Vegetarian</label> <br>
+
+     <input name="foods[gluten_free]" type="hidden" value="<%= @food.gluten_free %>" />
+     <input id="gluten" type="checkbox" name="foods[gluten_free]" >
+     <label for="gluten">Contains Gluten</label> <br>
+
+     <input name="foods[dairy_free]" type="hidden" value="<%= @food.dairy_free %>" />
+     <input id="dairy" type="checkbox" name="foods[dairy_free]" >
+     <label for="dairy">Contains Dairy</label> <br>
+
+     <input name="food[nut_free]" type="hidden" value="<%= @food.nut_free %>" />
+     <input id="nut" type="checkbox" name="foods[nut_free]" >
+     <label for="nut">Contains Nuts</label> <br>
+
+      <input type="hidden" name="_method" value="PATCH">
+      <input type="submit" value="Submit Changes">
+
+  </form>
+
+  <form action="/foods/<%= @food.id %>" method='POST'>
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Item">
+  </form>
+
+</div>

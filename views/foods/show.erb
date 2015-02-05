@@ -1,0 +1,17 @@
+<div class="container">
+
+	<h2><%= @food.name %></h2>
+
+	<p>Price: $<%= @food.price %></p>
+	<p>Category: <%= @food.category %></p>
+	<p>Description: <%= @food.description %></p>
+	<p>Dietary Resctrictions:</p>
+	<li><%= @food.vegetarian ? "Vegetarian" : "Contains meat" %></li>
+	<li><%= @food.gluten_free ? "Gluten Free" : "Contains gluten" %> </li>
+	<li><%= @food.nut_free ? "Nut Free" : "Contains nuts" %> </li>
+	<li><%= @food.dairy_free ? "Dairy Free" : "Contains dairy" %></li>
+
+	<a href="/foods/<%= @food.id %>/edit">Edit item</a>
+	<a href="/foods">Back to Menu</a>
+
+</div>
