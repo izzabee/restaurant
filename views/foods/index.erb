@@ -5,7 +5,7 @@
 	<ul>
 	<% @foods.where("category='Appetizer'").each do |food| %>
 	    <li>
-	        <a href="/foods/<%= food.id %>"><%= food.name %></a>
+	        <a href="/foods/<%= food.id %>"><%= food.name %>  $<%= '%.2f' % food.price %></a>
 	    </li>
 	    <br>
 	    <% end %>
@@ -15,7 +15,7 @@
 	<ul>
 	<% @foods.where("category='Entree'").each do |food| %>
 	    <li>
-	        <a href="/foods/<%= food.id %>"><%= food.name %></a>
+	        <a href="/foods/<%= food.id %>"><%= food.name %>  $<%= '%.2f' % food.price %></a>
 	    </li>
 	    <br>
 	    <% end %>
@@ -25,7 +25,7 @@
 	<ul>
 	<% @foods.where("category='Dessert'").each do |food| %>
 	    <li>
-	        <a href="/foods/<%= food.id %>"><%= food.name %></a>
+	        <a href="/foods/<%= food.id %>"><%= food.name %>  $<%= '%.2f' % food.price %></a>
 	    </li>
 	    <br>
 	    <% end %>
@@ -35,17 +35,17 @@
 	<ul>
 	<% @foods.where("category='Beverage'").each do |food| %>
 	    <li>
-	        <a href="/foods/<%= food.id %>"><%= food.name %></a>
+	        <a href="/foods/<%= food.id %>"><%= food.name %>  $<%= '%.2f' % food.price %></a>
 	    </li>
 	    <br>
 	    <% end %>
 	</ul>
 
 	<div class="allergies">
-		<a href="/foods/new">Add an item to the menu</a>
-		<a href="#">All Vegetarian Items</a>
-		<a href="#">All Gluten Free Items</a>
-		<a href="#">All Nut Free Items</a>
-		<a href="#">All Dairy Free Items</a>
+		<a href="/foods/veg">All Vegetarian Items</a>
+		<a href="/foods/gluten">All Gluten Free Items</a>
+		<a href="/foods/nuts">All Nut Free Items</a>
+		<a href="/foods/dairy">All Dairy Free Items</a>
 	</div>
+		<a href="/foods/new">Add an item to the menu</a>
 </div>

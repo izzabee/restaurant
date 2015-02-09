@@ -1,0 +1,14 @@
+<h2>Add a New Party</h2>
+
+<form action="/parties" method="POST">
+	
+	<label for="people">How Many Patrons</label>
+	<input id="people" type="number" name="parties[people]">
+	
+	<input type="hidden" value="false" name="parties[paid]">
+
+	<label for="table_id">Table Number</label>
+	<input id="table_id" type="number" name="parties[table_id]">
+
+	<input type="submit">
+</form>

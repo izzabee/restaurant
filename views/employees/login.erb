@@ -1,0 +1,20 @@
+<div class="login">
+
+	<h2>Log In Here:</h2>
+
+	<form action="/employees" method="POST">
+
+		<label for="employee_name">Name</label>
+		<select id="employee_name" name="employee_id">
+		<% @employees.each do |employee| %>
+			<option value="<%= employee.id %>"><%= employee.name %></option>
+		<% end %>
+		</select>
+
+		<!-- <label for="employee_password">Password</label>
+		<input id="employee_password" type="password" name="">
+		 -->
+		<input type="submit">
+
+	</form>
+</div>

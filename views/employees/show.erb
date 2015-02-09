@@ -1,0 +1,14 @@
+<h2><%= @employee.name %></h2>
+
+<h3>Current Parties</h3>
+	
+	<% @party.uniq.each do |party| %>
+
+		<p><%= party.table_id != 0 ? "Party #{party.id} at #{party.table_id}" : "Party #{party.id} checked out" %> </p>
+	<% end %>
+
+
+<h3>Tips</h3>
+	<% @party.uniq.each do |party| %>
+		<p>Party <%= party.id %> - <%= party.tip != nil ? "$#{party.tip}" : "Party is not checked out yet" %></p>
+	<% end %>

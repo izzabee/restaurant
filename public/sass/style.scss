@@ -1,0 +1,198 @@
+* {
+	margin:0;
+	border:0;
+	padding:0;
+	font-family: inherit;
+}
+
+body {
+	width:800px;
+	margin:0 auto;
+	font-family: 'Didact Gothic', sans-serif;
+	font-size:16px;
+	background:url(/swirl_pattern.png);
+}
+
+.main {
+	background:white;
+	padding:30px;
+	box-shadow: 3px 3px 5px 4px gray;
+	height:auto;
+}
+
+a {
+	color:gray;
+	text-decoration: none;
+	display:block;
+	padding:3px;
+
+		&:visited {
+			color:gray;
+		}
+
+		&:hover {
+			color:black;
+		}
+
+		&:active {
+			color:white;
+		}
+	}
+
+
+nav{
+	margin:0 auto;
+	text-align: center;
+	padding:10px;
+	background:#111;
+	font-size:25px;
+
+		li {
+			background:#111;
+			list-style: none;
+			display:inline-block;
+			margin:0 20px 0 20px;
+		}
+
+		a {
+			color:white;
+			font-weight: bold;
+
+				&:visited{
+					color:white;
+				}
+
+				&:hover {
+					display:inline-block;
+					color:black;
+					background-color:white;
+				}
+
+				&:active {
+					color:white;
+				}
+			}
+		}
+
+h1 {
+	font-family:'Pacifico', script; 
+}
+
+h2 {
+ 	padding:10px;
+ 	margin-bottom:10px;
+ 	text-align: center;
+}
+
+.clearfix:after {
+  clear: both;
+  content: "";
+}
+
+input[type="checkbox"] {
+	display:inline;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+	background:aliceblue;
+	outline:none;
+	padding:10px;
+	border-radius: 8px;
+	display: block;
+	width:auto;
+}
+
+input[type="submit"] {
+	padding:5px;
+	border-radius: 4px;
+	font-size:14px;
+	margin:5px;
+}
+
+input[type="submit"]:hover {
+	background-color:black;
+	color:#F8F8FF;
+	cursor:pointer;
+}
+
+li {
+	list-style: none;
+}
+
+p {
+	line-height: 1.5em;
+}
+
+.allergies {
+	display:block;
+	margin:20px 0 10px 0;
+}
+
+.green {
+	color:green;
+}
+
+.red {
+	color:red;
+}
+
+.side_menu {
+	width:200px;
+	float:right;
+	margin-top:-390px;
+	padding:20px;
+	border:1px solid gray;
+
+	input[type="submit"]{
+		display:inline;
+	}
+}
+
+.parties {
+	border:1px solid gray;
+	display:inline-block;
+	padding:20px;
+	color:black;
+
+		&:hover {
+			background-color:aliceblue;
+		}
+		&:active {
+			border:1px solid aliceblue;
+		}
+	}
+
+
+.order_change {
+	text-align: center;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.homepage h1 {
+	text-align: center;
+}
+
+.receipt { 
+	border:1px solid black;
+	width:50%;
+	margin:0 auto;
+	padding:10px;
+
+	.receipt_top, 
+	.receipt_middle,
+	.receipt_bottom {
+		padding:10px;
+
+		h1 {
+			text-align: center;
+		}
+
+	}
+}
+
+ol {
+	list-style: true;
+}

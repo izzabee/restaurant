@@ -1,0 +1,63 @@
+<h2>Party <%= @party.id %> Order</h2>
+
+<h3>Appetizers</h3>
+<% @foods.where("category='Appetizer'").each do |food| %>
+<form action="/orders/<%= @party.id %>/edit" method="POST">
+		<input type="hidden" value="<%= food.id %>" name="order[food_id]">
+		<input type="hidden" value="<%= @party.id %>" name="order[party_id]">
+		<input type="submit" value="<%= food.name %>">
+</form>
+<% end %>
+
+<h3>Entrees</h3>
+<% @foods.where("category='Entree'").each do |food| %>
+<form action="/orders/<%= @party.id %>/edit" method="POST">
+		<input type="hidden" value="<%= food.id %>" name="order[food_id]">
+		<input type="hidden" value="<%= @party.id %>" name="order[party_id]">
+		<input type="submit" value="<%= food.name %>">
+</form>
+<% end %>
+
+<h3>Dessers</h3>
+<% @foods.where("category='Dessert'").each do |food| %>
+<form action="/orders/<%= @party.id %>/edit" method="POST">
+		<input type="hidden" value="<%= food.id %>" name="order[food_id]">
+		<input type="hidden" value="<%= @party.id %>" name="order[party_id]">
+		<input type="submit" value="<%= food.name %>">
+</form>
+<% end %>
+
+
+<h3>Beverages</h3>
+<% @foods.where("category='Beverage'").each do |food| %>
+<form action="/orders/<%= @party.id %>/edit" method="POST">
+		<input type="hidden" value="<%= food.id %>" name="order[food_id]">
+		<input type="hidden" value="<%= @party.id %>" name="order[party_id]">
+		<input type="submit" value="<%= food.name %>">
+</form>
+<% end %>
+
+
+<div class="side_menu clearfix">
+	<h3>Current Order</h3>
+		<% @orders.uniq.each do |order| %> 
+	<p>	
+		<%= order.name %> -
+		<%= @party.foods.where(name: order.name).count %> 
+	</p>
+
+	<form action="/orders/<%= @party.id %>/order" method= "POST">
+		<input type="hidden" name="food[id]" value="<%= order.id%>">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Item">
+	</form>
+
+	<form action="/orders/<%= @party.id %>/order"  method="POST">
+		<input type="hidden" name="order[comped]" value="true">
+		<input type="hidden" name="_method" value="PATCH">
+		<input type="submit" value="Comp Item">
+	</form>
+	<% end %>
+</div>
+
+<a class="order_change" href="/parties/<%= @party.id %>">Submit</a>

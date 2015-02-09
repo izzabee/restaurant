@@ -1,21 +1,29 @@
 <div class="container">
   <h2> Add a New Food</h2>
+  <% if @error_messages %>
+    <% @error_messages.each do |error_name, error_message| %>
+       <p class='error'><%= error_name.capitalize %>: <%= error_message[0] %></p>
+    <% end %>
+<% end %>
+
 
   <form action="/foods" method="POST">
 
    <fieldset>
      <legend>Food Information</legend>
      <label for="name">Name</label>
-     <input id="name" type="text" name="foods[name]" placeholder="Name"> 
+     <input id="name" type="text" name="foods[name]" placeholder="Name" 
+       value="<%= @foods[:name] if @foods %>" >
+       
      <label for="category">Category</label>
-     <select id="category" name="foods[category]"> 
+     <select id="category" name="foods[category]" > 
          <option>Appetizer</option>
          <option>Entree</option>
          <option>Dessert</option>
          <option>Beverage</option>
      </select>
      <label for="price">Price</label>
-     <input id="price" type="number" step="0.50" name="foods[price]" placeholder="0.0"> 
+     <input id="price" type="number" step="0.50" name="foods[price]" placeholder="0.00"> 
      <label for="description">Description</label>
      <textarea id="description" name="foods[description]" placeholder="Food description here..."></textarea>
    </fieldset>

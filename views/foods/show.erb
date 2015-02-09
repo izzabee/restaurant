@@ -2,7 +2,7 @@
 
 	<h2><%= @food.name %></h2>
 
-	<p>Price: $<%= @food.price %></p>
+	<p>Price: $<%= '%.2f' % @food.price %></p>
 	<p>Category: <%= @food.category %></p>
 	<p>Description: <%= @food.description %></p>
 	<p>Dietary Resctrictions:</p>

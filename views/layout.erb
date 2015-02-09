@@ -1,10 +1,16 @@
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/style.css">
+	<link href='http://fonts.googleapis.com/css?family=Pacifico|Didact+Gothic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="/sass/style.css">
 	<title>Restaurant</title>
 </head>
 <body>
-		<%= erb :"/static/navigation" %>
-	<%= yield %>
+	
+	<%= erb :"/static/navigation" %>
+	
+	<div class="main">
+		<%= yield %>
+	</div>
+
 </body>
 </html>

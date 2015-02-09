@@ -17,21 +17,30 @@ end
 # 	nut_free BOOLEAN,
 # 	dairy_free BOOLEAN,
 # 	created_at TIMESTAMP,
-# 	update_at TIMESTAMP
+# 	updated_at TIMESTAMP
 # );
 
 # CREATE TABLE orders (
 # 	id SERIAL PRIMARY KEY,
 # 	food_id INT NOT NULL,
 # 	party_id INT NOT NULL,
+# 	employee_id INT NOT NULL,
 # 	created_at TIMESTAMP,
-# 	update_at TIMESTAMP
+# 	updated_at TIMESTAMP
 # );
 
 # CREATE TABLE parties (
 # 	id SERIAL PRIMARY KEY,
 # 	people INT NOT NULL,
-# 	paid BOOLEAN
+# 	paid BOOLEAN,
+# 	table_id INT,
+# 	created_at TIMESTAMP,
+# 	updated_at TIMESTAMP
+# );
+
+# CREATE TABLE employees (
+# 	id SERIAL PRIMARY KEY,
+# 	name VARCHAR,
 # 	created_at TIMESTAMP,
 # 	updated_at TIMESTAMP
 # );
@@ -43,7 +52,7 @@ ActiveRecord::Base.establish_connection(
 	port: 5432
 )
 
-# Populate foods table
+Populate foods table
 [
 	{
 		name:'French Onion Soup',
@@ -134,82 +143,119 @@ end
 [
 	{
 		people:4,
-		paid:false
+		paid:false,
+		table_id:
 	},
 	{
 		people:2,
-		paid:false
+		paid:false,
+		table_id:
 	},
 	{
 		people:5,
-		paid:false
+		paid:false,
+		table_id:
 	},
 	{
 		people:3,
-		paid:false
+		paid:false,
+		table_id:
 	}
 ].each do |party|
 	Party.create( party )
 end
 
-# Populate orders table
+# Populate employees table
+
+[
+	{
+		name:'Felix'
+	},
+	{
+		name:'Jessie'
+	},
+	{
+		name:'Claire'
+	},
+	{
+		name:'Kevin'
+	}
+].each do |employee|
+		Employee.create( employee )
+end
+
+Populate orders table
 
 [
 	{
 		food_id:1,
-		party_id:1
+		party_id:1,
+		employee_id:1
 	},
 	{
 		food_id:4,
-		party_id:2
+		party_id:2,
+		employee_id:2
 	},
 	{
 		food_id:2,
-		party_id:4
+		party_id:4,
+		employee_id:3
 	},
 	{
 		food_id:5,
-		party_id:3
+		party_id:3,
+		employee_id:4
 	},
 	{
 		food_id:3,
-		party_id:3
+		party_id:3,
+		employee_id:4
 	},
 	{
 		food_id:6,
-		party_id:1
+		party_id:1,
+		employee_id:1
 	},
 	{
 		food_id:7,
-		party_id:2
+		party_id:2,
+		employee_id:2
 	},
 	{
 		food_id:3,
-		party_id:4
+		party_id:4,
+		employee_id:3
 	},
 	{
 		food_id:7,
-		party_id:1
+		party_id:1,
+		employee_id:1
 	},
 	{
 		food_id:2,
-		party_id:3
+		party_id:3,
+		employee_id:4
 	},
 	{
 		food_id:5,
-		party_id:1
+		party_id:1,
+		employee_id:1
 	},
 	{
 		food_id:4,
-		party_id:3
+		party_id:3,
+		employee_id:4
 	},
 	{
 		food_id:1,
-		party_id:4
+		party_id:4,
+		employee_id:3
 	},
 	{
 		food_id:3,
-		party_id:3
+		party_id:3,
+		employee_id:4
 	}
 ].each do |order|
 	Order.create( order )

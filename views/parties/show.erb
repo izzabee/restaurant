@@ -1,12 +1,49 @@
-<h2><%= @party.id %></h2>
 
+<h2>Party <%= @party.id %></h2>
+<a href="/parties/<%= @party.id %>/edit">Edit Party</a>
+
+<p>Table <%= @party.table_id %></p>
+<p>Server: <%= @party.employees.first.name %></p>
 <p><%= @party.people %> people</p>
 <%= @party.paid ? "<p class='green'> Paid </p>" : "<p class='red'> Not paid </p>" %>
-<p>Arrived at <%= @party.created_at %></p>
+<p>Arrived at <%= @party.created_at.strftime "%I:%M %p" %></p>
 
-<h3>Orders</h3>
-<% @orders.each do |order|	%>
-<p><%= order.name - order.price %></p>
-<p><%= %></p>
-<p><%= %></p>
-<% end %>
+<br>
+
+<div class="orders">
+
+	<h3>Orders</h3>
+	<% @orders.uniq.each do |order| %>
+		<p>(<%=@party.foods.where(name: order.name).count %>) <%= order.name %> $<%= '%.2f' % order.price %></p>
+	<% end %>
+
+<br>
+	
+	<h3>Subtotal $<%= '%.2f' % @orders.sum(:price) %></h3>
+
+</div>
+
+<br>
+<div class="buttons">
+	<% unless @party.paid %>
+		<a href="/orders/<%= @party.id %>/edit">Modify order</a>
+	<% end %>
+	<% if @party.paid %>
+		<a href="/orders/<%= @party.id %>/receipt">Print Receipt</a>
+	<% end %>
+
+	<form action="/parties/<%= @party.id %>" method="POST">
+		<input type="hidden" name="_method" value="PATCH">
+		<input type="hidden" value="TRUE" name="parties[paid]">
+		<input id="paid" type="submit" value="Pay Bill">
+	</form>
+
+	<form action="/parties/<%= @party.id %>" method="POST">
+		<input type="hidden" name="_method" value="PATCH">
+		<input type="hidden" value="FALSE" name="parties[paid]">
+		<input id="paid" type="submit" value="Unpay Bill">
+	</form>
+
+</div>
+    
+    <a href="/parties">Back to all parties</a>
