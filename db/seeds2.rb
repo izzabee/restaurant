@@ -146,28 +146,28 @@ end
 		paid:false,
 		table_id:1,
 		employee_id:4,
-		tip:
+		tip:0
 	},
 	{
 		people:2,
 		paid:false,
 		table_id:2,
 		employee_id:3,
-		tip:
+		tip:0
 	},
 	{
 		people:5,
 		paid:false,
 		table_id:3,
 		employee_id:2,
-		tip:
+		tip:0
 	},
 	{
 		people:3,
 		paid:false,
 		table_id:4,
 		employee_id:1,
-		tip:
+		tip:0
 	}
 ].each do |party|
 	Party.create( party )
