@@ -3,23 +3,31 @@
 <a href="/parties/<%= @party.id %>/edit">Edit Party</a>
 
 <p>Table <%= @party.table_id %></p>
-<p>Server: <%= @party.employees.first.name %></p>
+<p>Server: <%= @party.employee != nil ? @party.employee.name  : "Not yet assigned" %> </p>
 <p><%= @party.people %> people</p>
 <%= @party.paid ? "<p class='green'> Paid </p>" : "<p class='red'> Not paid </p>" %>
-<p>Arrived at <%= @party.created_at.strftime "%I:%M %p" %></p>
+<p>Arrived at <%= @party.created_at.to_time.strftime "%I:%M %p" %></p>
 
 <br>
 
 <div class="orders">
 
 	<h3>Orders</h3>
-	<% @orders.uniq.each do |order| %>
-		<p>(<%=@party.foods.where(name: order.name).count %>) <%= order.name %> $<%= '%.2f' % order.price %></p>
+
+	<% @orders.where("comped='false'").uniq.each do |order| %>
+		<p>(<%=@orders.where("comped='false' AND foods.name='#{order.name}'").count %>) <%= order.name %> £<%= '%.2f' % order.price %></p>
 	<% end %>
+<hr>
+	<% @orders.where("comped='true'").uniq.each do |order| %>
+		<p>(<%=@orders.where("comped='true' AND foods.name='#{order.name}'").count %>) <%= order.name %> £0.00 - Comped</p>
+	<% end %>
+
+
+
 
 <br>
 	
-	<h3>Subtotal $<%= '%.2f' % @orders.sum(:price) %></h3>
+	<h3>Subtotal £<%= '%.2f' % @party.foods.where("comped='false'").sum(:price) %></h3>
 
 </div>
 
@@ -34,13 +42,13 @@
 
 	<form action="/parties/<%= @party.id %>" method="POST">
 		<input type="hidden" name="_method" value="PATCH">
-		<input type="hidden" value="TRUE" name="parties[paid]">
+		<input type="hidden" value="TRUE" name="party[paid]">
 		<input id="paid" type="submit" value="Pay Bill">
 	</form>
 
 	<form action="/parties/<%= @party.id %>" method="POST">
 		<input type="hidden" name="_method" value="PATCH">
-		<input type="hidden" value="FALSE" name="parties[paid]">
+		<input type="hidden" value="FALSE" name="party[paid]">
 		<input id="paid" type="submit" value="Unpay Bill">
 	</form>
 

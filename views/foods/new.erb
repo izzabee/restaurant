@@ -2,9 +2,9 @@
   <h2> Add a New Food</h2>
   <% if @error_messages %>
     <% @error_messages.each do |error_name, error_message| %>
-       <p class='error'><%= error_name.capitalize %>: <%= error_message[0] %></p>
+       <p class='red'> Oops! <%= error_message[0] %> </p>
     <% end %>
-<% end %>
+  <% end %>
 
 
   <form action="/foods" method="POST">
@@ -12,20 +12,19 @@
    <fieldset>
      <legend>Food Information</legend>
      <label for="name">Name</label>
-     <input id="name" type="text" name="foods[name]" placeholder="Name" 
-       value="<%= @foods[:name] if @foods %>" >
+     <input id="name" type="text" name="food[name]" placeholder="Name" >
        
      <label for="category">Category</label>
-     <select id="category" name="foods[category]" > 
+     <select id="category" name="food[category]" > 
          <option>Appetizer</option>
          <option>Entree</option>
          <option>Dessert</option>
          <option>Beverage</option>
      </select>
      <label for="price">Price</label>
-     <input id="price" type="number" step="0.50" name="foods[price]" placeholder="0.00"> 
+     <input id="price" type="number" step="0.50" name="food[price]" placeholder="0.00"> 
      <label for="description">Description</label>
-     <textarea id="description" name="foods[description]" placeholder="Food description here..."></textarea>
+     <textarea id="description" name="food[description]" placeholder="Food description here..."></textarea>
    </fieldset>
 
    <br>
@@ -33,23 +32,23 @@
    <fieldset>
     <legend>Dietary Restrictions</legend>
 
-     <input name="foods[vegetarian]" type="hidden" value="false" />
+     <input name="food[vegetarian]" type="hidden" value="false" />
      <input id="veggie" name="food[vegetarian]" type="checkbox" value="true" />
      <label for="veggie">Vegetarian</label> <br>
 
-     <input name="foods[gluten_free]" type="hidden" value="false" />
-     <input id="gluten" type="checkbox" name="foods[gluten_free]" >
+     <input name="food[gluten_free]" type="hidden" value="false" />
+     <input id="gluten" type="checkbox" name="food[gluten_free]" >
      <label for="gluten">Contains Gluten</label> <br>
 
-     <input name="foods[dairy_free]" type="hidden" value="false" />
-     <input id="dairy" type="checkbox" name="foods[dairy_free]" >
+     <input name="food[dairy_free]" type="hidden" value="false" />
+     <input id="dairy" type="checkbox" name="food[dairy_free]" >
      <label for="dairy">Contains Dairy</label> <br>
 
      <input name="food[nut_free]" type="hidden" value="false" />
-     <input id="nut" type="checkbox" name="foods[nut_free]" >
+     <input id="nut" type="checkbox" name="food[nut_free]" >
      <label for="nut">Contains Nuts</label> <br>
 
    </fieldset>
-   <input type="submit" value="Submit">
+   <input type="submit" >
   </form>
 </div>

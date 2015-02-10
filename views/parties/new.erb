@@ -1,14 +1,20 @@
 <h2>Add a New Party</h2>
 
+<% if @error_messages %>
+  <% @error_messages.each do |error_name, error_message| %>
+     <p class='red'> Oops! <%= error_message[0] %> </p>
+  <% end %>
+<% end %>
+
 <form action="/parties" method="POST">
 	
 	<label for="people">How Many Patrons</label>
-	<input id="people" type="number" name="parties[people]">
+	<input id="people" type="number" name="party[people]">
 	
-	<input type="hidden" value="false" name="parties[paid]">
+	<input type="hidden" value="false" name="party[paid]">
 
 	<label for="table_id">Table Number</label>
-	<input id="table_id" type="number" name="parties[table_id]">
+	<input id="table_id" type="number" name="party[table_id]">
 
 	<input type="submit">
 </form>

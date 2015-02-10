@@ -1,19 +1,16 @@
-	<h2>Current Parties</h2>
+<h2>Current Parties</h2>
 
-<!-- < % unless @parties.where(table_id:0) %> -->
-
-	<% @parties.each do |party| %>
-		<a class="parties" href="parties/<%= party.id %>">
-		<div>
-			<p> Party <%= party.id %> / Table <%= party.table_id %></p>
-			<p><%= party.people %> people</p>
-			<%= party.paid ? "<p class='green'> Paid </p>" : "<p class='red'> Not paid </p>" %>
-			<p>Arrived at <%= party.created_at.strftime "%I:%M %p" %></p>
-		</div>
-		</a>
-	<% end %>
-<!-- < % end %> -->
+<% @parties.each do |party| %>
+	<a class="parties" href="parties/<%= party.id %>">
+	<div>
+		<p> Party <%= party.id %> / Table <%= party.table_id %></p>
+		<p><%= party.people %> people</p>
+		<%= party.paid ? "<p class='green'> Paid </p>" : "<p class='red'> Not paid </p>" %>
+		<p>Arrived at <%= party.created_at.to_time.strftime "%I:%M %p" %></p>
+	</div>
+	</a>
+<% end %>
 
 
-
-	<a class="order_change" href="/parties/new">Add a party</a>
+<a class="order_change" href="/parties/new">Add a party</a>
+<a class="order_change" href="/parties/past">View past parties</a>

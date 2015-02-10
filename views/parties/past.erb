@@ -1,0 +1,14 @@
+<h2>Past Parties</h2>
+
+<% @parties.each do |party| %>
+	<div class="pastparties">
+		<p>Party <%= party.id %> </p>
+		<p>Server: <%= party.employee.name %></p>
+		<p><%= party.people %> people</p>
+		<p>Checked out at <%= party.updated_at.to_time.strftime "%I:%M %p" %></p>
+		<h4>Bill: £<%= '%.2f' %  party.foods.sum(:price) %> </h4>
+	</div>
+<% end %>
+
+
+<a class="order_change" href="/parties">Back to Current Parties</a>

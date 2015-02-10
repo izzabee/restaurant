@@ -1,16 +1,21 @@
 <h2>Edit a Party</h2>
 
+<% if @error_messages %>
+  <% @error_messages.each do |error_name, error_message| %>
+     <p class='red'> Oops! <%= error_message[0] %> </p>
+  <% end %>
+<% end %>
+
 <form action="/parties/<%= @party.id %>" method="POST">
 	
 	<label for="people">How Many Patrons</label>
-	<input id="people" type="number" value="<%= @party.people %>" name="parties[people]">
+	<input id="people" type="number" value="<%= @party.people %>" name="party[people]" >
 	
 	<label for="table_id">Table Number</label>
-	<input id="table_id" type="number" value="<%= @party.table_id %>" name="parties[table_id]">
+	<input id="table_id" type="number" value="<%= @party.table_id %>" name="party[table_id]" >
 	
-	<input type="hidden" value="false" name="parties[paid]">
+	<input type="hidden" value="false" name="party[paid]">
 
 	<input type="hidden" name="_method" value="PATCH"> 
-
 	<input type="submit" value="Submit Changes">
 </form>

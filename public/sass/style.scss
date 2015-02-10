@@ -141,13 +141,27 @@ p {
 .side_menu {
 	width:200px;
 	float:right;
-	margin-top:-390px;
+	margin-top:-500px;
 	padding:20px;
 	border:1px solid gray;
 
-	input[type="submit"]{
+
+/*	input[type="submit"] + input[type="submit"] {
 		display:inline;
+		position:relative;
+	}*/
+
+	.clearfix{
+		clear:both;
+		content:"";
 	}
+}
+
+.pastparties {
+	border:1px solid gray;
+	display:inline-block;
+	padding:20px;
+	color:black;
 }
 
 .parties {
@@ -190,9 +204,30 @@ p {
 			text-align: center;
 		}
 
+		hr {
+			width:300px;
+			margin:10px;
+		}
+
 	}
 }
 
 ol {
 	list-style: true;
+}
+
+.comped {
+	float:right;
+}
+
+.comp {
+	float:left;
+	width:100px;
+}
+
+hr {
+	background:silver;
+	border:none;
+	height:1px;
+	width:400px;
 }

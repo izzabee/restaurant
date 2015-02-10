@@ -12,3 +12,6 @@
 	<% @party.uniq.each do |party| %>
 		<p>Party <%= party.id %> - <%= party.tip != nil ? "$#{party.tip}" : "Party is not checked out yet" %></p>
 	<% end %>
+
+<h3><a class="order_change" href="/parties/new">Add a party</a></h3>
+<h3> <a href="/parties">See All Current Parties</a> </h3>

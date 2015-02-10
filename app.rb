@@ -2,15 +2,30 @@ Dir["models/*.rb"].each do |file|
   require_relative file
 end
 
-# class Restaraunt < Sinatra::Base
-# 	register Sinatra::ActiveRecordExtension
-# 	enable :method_override 
-# 	enable :sessions
-# 	set :app_password, "1234"
+configure do 
+	set :scss, {:style => :compressed, :debug_info => false}
+end
+
+class Restaurant < Sinatra::Base
+	register Sinatra::ActiveRecordExtension
+	enable :method_override 
+	enable :sessions
+	set :app_password, "1234"
 
 	###################
 	##### ROUTES ######
 	###################
+
+	get '/css/:name.css' do |name|
+		content_type :css
+		scss "../public/sass/#{name}".to_sym, :layout => false
+	end
+
+	before '*' do 
+	  unless (request.path == '/employees' || session[:id])
+	    redirect to('/employees')
+	  end
+	end
 
 	# Console
 	get '/console' do 
@@ -21,7 +36,7 @@ end
 	# Homepage
 	get '/' do 
 
-	erb :index
+		erb :index
 	end
 
 
@@ -35,7 +50,7 @@ end
 
 		@foods = Food.all
 
-	erb :'foods/index'
+		erb :'foods/index'
 	end
 
 	# Shows all vegetarian items
@@ -43,14 +58,14 @@ end
 
 		@foods = Food.all
 
-	erb :'foods/veg'
+		erb :'foods/veg'
 	end
 	# Shows all gluten-free items
 	get '/foods/gluten' do 
 
 		@foods = Food.all
 
-	erb :'foods/gluten'
+		erb :'foods/gluten'
 	end
 
 	# Shows all dairy-free items
@@ -58,7 +73,7 @@ end
 
 		@foods = Food.all
 
-	erb :'foods/dairy'
+		erb :'foods/dairy'
 	end
 
 	# Shows all nut-free items
@@ -66,7 +81,7 @@ end
 
 		@foods = Food.all
 
-	erb :'foods/nuts'
+		erb :'foods/nuts'
 	end
 
 
@@ -75,19 +90,19 @@ end
 
 		@foods = Food.all
 
-	erb :'foods/new'
+		erb :'foods/new'
 	end
 
 	# Creates new food
 	post '/foods' do 
 
-		foods = Food.create( params[:foods] )
+		food = Food.create( params[:food] )
 
-		if foods.valid?
+		if food.valid?
 			redirect to('/foods')
 		else
-			@foods = food
-			@error_message = food.errors.messages
+			@food = food
+			@error_messages = food.errors.messages
 			
 			erb :'foods/new'
 		end
@@ -99,7 +114,7 @@ end
 
 		@food = Food.find(id)
 
-	erb :'foods/show'
+		erb :'foods/show'
 	end
 
 	# Update a menu item
@@ -107,7 +122,7 @@ end
 
 		@food = Food.find(id)
 
-	erb :'foods/edit'
+		erb :'foods/edit'
 	end
 
 	# Updates food item in db
@@ -116,7 +131,7 @@ end
 		food = Food.find(id)
 		food.update( params[:foods] )
 
-	redirect to("foods/#{id}")
+		redirect to("foods/#{id}")
 	end
 
 	# Deletes food item from db
@@ -125,7 +140,7 @@ end
 		food = Food.find(id)
 		food.destroy
 
-	redirect to("foods/#{id}")
+		redirect to("foods/#{id}")
 	end
 
 	###############
@@ -136,27 +151,38 @@ end
 	# Shows all parties
 	get '/parties' do 
 
-		@parties = Party.all
-		# Pry.start(binding)
+		@parties = Party.where("table_id != 0").all
 
-	erb :'parties/index'
+		erb :'parties/index'
+	end
+	
+	# Shows checked out parties
+	get '/parties/past' do 
+
+		@parties = Party.where("table_id = 0").all
+
+		erb :'parties/past'
 	end
 
 	# Add new party
 	get '/parties/new' do 
 
-	erb :'parties/new'
+		erb :'parties/new'
 	end
 
 	# Creates new party
 	post '/parties' do 
 
-		parties = Party.create( params[:parties] )
-		params[:party][:employee_id] = session[:employee_id]
+		party = Party.create( params[:party] )
 
-    Party.new( params[:party] )
-
-	redirect to('/parties')
+		if party.valid?
+			redirect to('/parties')
+			params[:party][:employee_id] = session[:id]
+		else
+			@party = party
+			@error_messages = party.errors.messages
+			erb :'parties/new'
+		end
 	end
 
 	# Shows individual parties 
@@ -165,7 +191,7 @@ end
 		@party = Party.find(id)
 		@orders = @party.foods
 
-	erb :'parties/show'
+		erb :'parties/show'
 	end
 
 	# Update party
@@ -173,34 +199,41 @@ end
 
 		@party = Party.find(id)
 
-	erb :'parties/edit'
+		erb :'parties/edit'
 	end
 
 	# Updates party in db
 	patch '/parties/:id' do |id|
 
 		party = Party.find(id)
-		party.update(params[:parties])
+		party.update( params[:party] )
 
-	redirect to("parties/#{id}")
+		if party.valid?
+			redirect to("parties/#{id}")
+		else
+			@party = party
+			@error_messages = party.errors.messages
+			erb :'parties/edit'
+		end
+
 	end
 
 	# Adds tip for a party
 	patch '/orders/:id/receipt' do |id|
 
 		parties = Party.find(id)
-		parties.update(params[:parties])
+		parties.update( params[:party] )
 
-	redirect to("orders/#{id}/receipt")
+		redirect to("orders/#{id}/receipt")
 	end
 
 	# Sets party table_id to 0 for checkout
 	patch '/parties/checkout/:id' do |id|
 
 		party = Party.find(id)
-		party.update(params[:parties])
+		party.update(params[:party])
 
-	redirect to("/parties")
+		redirect to("/parties")
 	end
 
 	# Deletes food from party's order
@@ -209,13 +242,13 @@ end
 		party = Party.find(id)
 		party.destroy
 
-	redirect to("/parties")
+		redirect to("/parties")
 	end
 
 	# Deletes party from db
 	delete '/parties/:id' do |id|
 
-	redirect to("parties/#{id}")
+		redirect to("parties/#{id}")
 	end
 
 
@@ -231,18 +264,17 @@ end
 
 		@tax = (0.0875).to_f
 
-		# Pry.start(binding)
-	erb :'orders/receipt'
+		erb :'orders/receipt'
 	end
 
-	# Edit a party
+	# Edit a party's order
 	get '/orders/:id/edit' do |id|
 
 		@party = Party.find(id)
 		@orders = @party.foods
 		@foods = Food.all
 
-	erb :'orders/edit'
+		erb :'orders/edit'
 	end
 
 	# Makes new order for a party
@@ -250,16 +282,16 @@ end
 
 		order = Order.create( params[:order] )
 
-	redirect to("orders/#{id}/edit")
+		redirect to("orders/#{id}/edit")
 	end
 
 	# Comps item for a party
-	patch '/orders/:id/receipt' do |id|
+	patch '/orders/:id/order' do |id|
 
 		order = Order.find(id)
-		order.update(params[:order])
+		order.update( params[:order] )
 
-	redirect to("orders/#{id}/edit")
+		redirect to("orders/#{id}/edit")
 	end
 
 	# Deletes a food order for a party
@@ -268,7 +300,7 @@ end
 		order = Order.where("party_id = #{id} AND food_id = #{params[:food][:id]}")
 		order.first.destroy
 
-	redirect to "/orders/#{id}/edit"
+		redirect to "/orders/#{id}/edit"
 	end
 
 
@@ -282,7 +314,7 @@ end
 
 		@employees = Employee.all
 
-	erb :'employees/login'
+		erb :'employees/login'
 	end
 
 	# Shows a specific employee and their parties
@@ -300,7 +332,7 @@ end
 		session[:id] = params[:employee_id]
 		employee = Employee.find(params[:employee_id])
 
-	redirect to "/employees/#{employee.id}"
+		redirect to "/employees/#{employee.id}"
 	end
 
-# end
+end

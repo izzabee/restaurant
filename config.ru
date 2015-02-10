@@ -11,4 +11,4 @@ set :database, {
 }
 
 require './app'
-run Sinatra::Application
+run Restaurant

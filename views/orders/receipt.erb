@@ -5,54 +5,52 @@
 	<div class="receipt_top">
 	<h3>Party <%= @party.id %> </h3>
 	<p>Table <%= @party.table_id %></p>
-	<p>Server: <%= @party.employees.first.name %></p>
+	<p>Server: <%= @party.employee.name %></p>
 	<p><%= @party.created_at.strftime "%A %B %e, %Y" %></p>
 	</div>	
 
 
 	<div class="receipt_middle">
 		<h3>Order</h3>
-		 <% @party.orders.each do |order| %>
-		   <% if order.comped %>
-			   <p><%= order.food.name %> - On the house</p>
-		   <% else %>
-			   <p> <%= order.food.name %> - <%= '%.2f' % order.food.price %></p>
-		   <% end %>
-		 <% end %>
+			<% @orders.where("comped='false'").uniq.each do |order| %>
+				<p><%=@orders.where("comped='false' AND foods.name='#{order.name}'").count %> - <%= order.name %> £<%= '%.2f' % order.price %></p>
+			<% end %>
+
+			<hr>
+
+			<% @orders.where("comped='true'").uniq.each do |order| %>
+				<p><%=@orders.where("comped='true' AND foods.name='#{order.name}'").count %> - <%= order.name %> £0.00 - Comped</p>
+			<% end %>
+
 		</div>
-
-
-<!-- <p>< %= order.food.name.where("order.food.name=order.food.name").count %></p> -->
 
 
 	<div class="receipt_bottom">
 		<% bill = 0 %>
 			<% @party.orders.each do |order| %>
-				<% if order.comped == false %>
-					<% bill += order.food.price %>
-				<% end %>
+				<% bill += order.food.price if order.comped == false %>
 			<% end %>
 		<p>Subtotal: <%= '%.2f' % bill %></p>
 		<p>Tax <%= '%.2f' % tax = bill * @tax %></p>
-		<h3>Total $<%= total = bill + tax.round(2) %></h3>
+		<h3>Total £<%= total = bill + tax.round(2) %></h3>
  
 <br>
 
 		<form action="/orders/<%= @party.id %>/receipt" method="POST">
 			<label for="party_tip">Suggested Tip</label><br>
 			<input id="party_tip" type="radio" 
-			value="<%=  (total * 0.15).round(2) %>" name="parties[tip]" <%= "checked='checked'" if @party.tip == @party.tip %>>15% ($<%= '%.2f' % (total * 0.15) %>)
+			value="<%=  (total * 0.15).round(2) %>" name="party[tip]" >15% (£<%= '%.2f' % (total * 0.15) %>)
 			<input id="party_tip" type="radio" 
-			value="<%=  (total * 0.2).round(2) %>" name="parties[tip]" >20% ($<%= '%.2f' % (total * 0.2) %>)
+			value="<%=  (total * 0.2).round(2) %>" name="party[tip]" >20% (£<%= '%.2f' % (total * 0.2) %>)
 			<input id="party_tip" type="radio" 
-			value="<%=  (total * 0.25).round(2) %>" name="parties[tip]" >25% ($<%= '%.2f' % (total * 0.25) %>)
+			value="<%=  (total * 0.25).round(2) %>" name="party[tip]" >25% (£<%= '%.2f' % (total * 0.25) %>)
 			<br>
 			<input type="hidden" value="PATCH" name="_method">
 			<input type="submit">
 		</form>
 
 		<% unless @party.tip == nil %>
-			<p>Thank you for your generous tip of $<%= '%.2f' % @party.tip %> </p>
+			<p>Thank you for your generous tip of £<%= '%.2f' % @party.tip %> </p>
 		<% end %>
 
 
@@ -61,7 +59,7 @@
 </div>
 
 <form action="/parties/checkout/<%= @party.id %>" method="POST">
-	<input type="hidden" name="parties[table_id]" value="0">
+	<input type="hidden" name="party[table_id]" value="0">
 	<input type="hidden" value="PATCH" name="_method">
 	<input type="submit" value="Close Party">
 </form>

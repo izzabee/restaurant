@@ -6,9 +6,9 @@
 
 		<label for="employee_name">Name</label>
 		<select id="employee_name" name="employee_id">
-		<% @employees.each do |employee| %>
-			<option value="<%= employee.id %>"><%= employee.name %></option>
-		<% end %>
+			<% @employees.each do |employee| %>
+				<option value="<%= employee.id %>"><%= employee.name %></option>
+			<% end %>
 		</select>
 
 		<!-- <label for="employee_password">Password</label>

@@ -4,8 +4,7 @@ class Food < ActiveRecord::Base
 	
 	validates :name, 
 		uniqueness: {
-			message: "%{value} is already on the menu!"
+			message: "%{value} is already on the menu."
 	 }
-
 
 end
