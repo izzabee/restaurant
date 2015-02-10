@@ -55,4 +55,6 @@
 </div>
     
     <a href="/parties">Back to all parties</a>
+    <% unless @party.employee_id == nil %> 
     <a href="/employees/<%= @party.employee_id %>">Back to <%= @party.employee.name %>'s parties</a>
+    <% end %>
