@@ -40,24 +40,24 @@
 
 <div class="side_menu clearfix">
 	<h3>Current Order</h3>
-		<% @orders.uniq.each do |order| %> 
+		<% @orders.each do |order| %> 
 		<p>	
-			<%= order.name %> - <%= @party.foods.where(name: order.name).count %>
+			<%= order.food.name %> <%= "*" if order.comped == true %>
 		</p>
 
-		<form action="/orders/<%= @party.id %>/order" method= "POST">
+		<form action="/orders/<%= order.id %>/order" method= "POST">
 			<input type="hidden" name="food[id]" value="<%= order.id%>">
 	    <input type="hidden" name="_method" value="DELETE">
 	    <input type="submit" value="Delete Item">
 		</form>
 
-		<form class="comp" action="/orders/<%= @party.id %>/order"  method="POST">
+		<form class="comp" action="/orders/<%= order.id %>/order"  method="POST">
 			<input type="hidden" name="order[comped]" value="true" >
 			<input type="submit" value="Comp" >
 			<input type="hidden" name="_method" value="PATCH">
 		</form>
 		
-		<form  class="comp" action="/orders/<%= @party.id %>/order"  method="POST">
+		<form  class="comp" action="/orders/<%= order.id %>/order"  method="POST">
 			<input type="hidden" name="order[comped]" value="false" >
 			<input type="submit" value="Uncomp" >
 			<input type="hidden" name="_method" value="PATCH">

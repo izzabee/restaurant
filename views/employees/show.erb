@@ -3,15 +3,19 @@
 <h3>Current Parties</h3>
 	
 	<% @party.uniq.each do |party| %>
-
-		<p><%= party.table_id != 0 ? "Party #{party.id} at #{party.table_id}" : "Party #{party.id} checked out" %> </p>
+		<a class="parties" href="/parties/<%= party.id %>">
+			<div>
+				<p><%= party.table_id != 0 ? "Party #{party.id} at Table #{party.table_id}" : "Party #{party.id} checked out" %> </p>
+			</div>
+		</a>
 	<% end %>
 
 
 <h3>Tips</h3>
 	<% @party.uniq.each do |party| %>
-		<p>Party <%= party.id %> - <%= party.tip != nil ? "$#{party.tip}" : "Party is not checked out yet" %></p>
+		<p>Party <%= party.id %> - <%= party.tip != nil ? "£" '%.2f' % "#{party.tip}" : "Has not paid yet" %></p>
 	<% end %>
 
-<h3><a class="order_change" href="/parties/new">Add a party</a></h3>
-<h3> <a href="/parties">See All Current Parties</a> </h3>
+
+<h4><a class="order_change" href="/parties/new">Add a party</a></h4>
+<h4> <a class="order_change" href="/parties">See All Current Parties</a> </h4>

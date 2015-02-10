@@ -257,9 +257,9 @@ class Restaurant < Sinatra::Base
 	##############
 
 	# Shows receipt
-	get '/orders/:id/receipt' do |id|
+	get '/orders/:party_id/receipt' do |party_id|
 
-		@party = Party.find(id)
+		@party = Party.find(party_id)
 		@orders = @party.foods	
 
 		@tax = (0.0875).to_f
@@ -268,39 +268,39 @@ class Restaurant < Sinatra::Base
 	end
 
 	# Edit a party's order
-	get '/orders/:id/edit' do |id|
+	get '/orders/:party_id/edit' do |party_id|
 
-		@party = Party.find(id)
-		@orders = @party.foods
+		@party = Party.find(party_id)
+		@orders = @party.orders
 		@foods = Food.all
 
 		erb :'orders/edit'
 	end
 
 	# Makes new order for a party
-	post '/orders/:id/edit' do |id|
+	post '/orders/:party_id/edit' do |party_id|
 
 		order = Order.create( params[:order] )
 
-		redirect to("orders/#{id}/edit")
+		redirect to("orders/#{party_id}/edit")
 	end
 
 	# Comps item for a party
-	patch '/orders/:id/order' do |id|
+	patch '/orders/:order_id/order' do |order_id|
 
-		order = Order.find(id)
+		order = Order.find(order_id)
 		order.update( params[:order] )
 
-		redirect to("orders/#{id}/edit")
+		redirect to("/orders/#{order.party_id}/edit")
 	end
 
 	# Deletes a food order for a party
-	delete '/orders/:id/order' do |id|
-		
-		order = Order.where("party_id = #{id} AND food_id = #{params[:food][:id]}")
-		order.first.destroy
+	delete '/orders/:order_id/order' do |order_id|
 
-		redirect to "/orders/#{id}/edit"
+		order = Order.find(order_id)		
+		order.destroy
+
+		redirect to "/orders/#{order.party_id}/edit"
 	end
 
 
