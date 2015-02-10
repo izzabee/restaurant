@@ -1,6 +1,10 @@
 <div class="container">
 	<h2>Dairy Free Menu Items</h2>
 
+	<div class="icon">
+		<img src="/dairy_free.png">
+	</div>
+
 	<h3>Appetizers</h3>
 	<ul>
 	<% @foods.where("category='Appetizer'").where("dairy_free").each do |food| %>

@@ -87,6 +87,8 @@ h2 {
 .clearfix:after {
   clear: both;
   content: "";
+  display:block;
+  visibility: hidden;
 }
 
 input[type="checkbox"] {
@@ -208,7 +210,6 @@ p {
 			width:300px;
 			margin:10px;
 		}
-
 	}
 }
 
@@ -240,4 +241,18 @@ span {
 	text-align: center;
 	font-size:10px;
 	padding-top:25px;
+	background:white;
+}
+
+.chef img {
+	position:relative;
+	width:200px;
+	left:250px;
+	padding:15px;
+}
+
+.icon img {
+	position:relative;
+	width:75px;
+	left:45%;
 }

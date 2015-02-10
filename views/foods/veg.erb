@@ -1,6 +1,11 @@
 <div class="container">
 	<h2>Vegetarian Menu Items</h2>
 
+	<div class="icon">
+		<img src="/veg.png">
+	</div>
+
+
 	<h3>Appetizers</h3>
 	<ul>
 	<% @foods.where("category='Appetizer'").where("vegetarian").each do |food| %>

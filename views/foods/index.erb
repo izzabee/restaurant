@@ -1,6 +1,11 @@
 <div class="container">
 	<h2>Today's Menu</h2>
 
+	<div class="icon">
+		<img src="/food.png">
+	</div>
+
+
 	<h3>Appetizers</h3>
 	<ul>
 	<% @foods.where("category='Appetizer'").each do |food| %>
