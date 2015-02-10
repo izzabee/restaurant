@@ -140,7 +140,7 @@ class Restaurant < Sinatra::Base
 		food = Food.find(id)
 		food.destroy
 
-		redirect to("foods/#{id}")
+		redirect to("/foods")
 	end
 
 	###############

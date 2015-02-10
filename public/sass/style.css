@@ -177,4 +177,12 @@ hr {
   height: 1px;
   width: 400px; }
 
+span {
+  font-size: 9px; }
+
+.footer {
+  text-align: center;
+  font-size: 10px;
+  padding-top: 25px; }
+
 /*# sourceMappingURL=style.css.map */
