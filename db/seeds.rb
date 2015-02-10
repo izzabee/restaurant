@@ -54,145 +54,145 @@ ActiveRecord::Base.establish_connection(
 	port: 5432
 )
 
-# # Populate foods table
-# [
-# 	{
-# 		name:'French Onion Soup',
-# 		price:7,
-# 		category:'Appetizer',
-# 		description:'Onion soup with bread and melted cheese baked on top',
-# 		vegetarian:true,
-# 		gluten_free:false,
-# 		nut_free:true,
-# 		dairy_free:false,
-# 	},
-# 	{
-# 		name:'Pepper Crusted Ahi Tuna Salad',
-# 		price:13.50,
-# 		category:'Appetizer',
-# 		description:'Fresh greens with chopped tomatoes and peppers, pan seared pepper crusted tuna topped with a ginger-lime aioli',
-# 		vegetarian:false,
-# 		gluten_free:true,
-# 		nut_free:true,
-# 		dairy_free:true,
-# 	},
-# 	{
-# 		name:'Braised Oxtail Ravioli',
-# 		price:13.50,
-# 		category:'Appetizer',
-# 		description:'Homemade oxtail ravioli with brussels sprouts',
-# 		vegetarian:false,
-# 		gluten_free:false,
-# 		nut_free:true,
-# 		dairy_free:false,
-# 	},
-# 	{
-# 		name:'Duck Confit',
-# 		price:23,
-# 		category:'Entree',
-# 		description:'Confit duck leg with tumeric stewed fennel topped with a mango salsa',
-# 		vegetarian:false,
-# 		gluten_free:true,
-# 		nut_free:true,
-# 		dairy_free:true,
-# 	},
-# 	{
-# 		name:'Surf N Turf',
-# 		price:27,
-# 		category:'Entree',
-# 		description:'Pan seared pork tenderloin with seared scallops and a cauliflower mousse',
-# 		vegetarian:false,
-# 		gluten_free:true,
-# 		nut_free:false,
-# 		dairy_free:false,
-# 	},
-# 	{
-# 		name:'Gnocchi in Fennel Cream sauce',
-# 		price:21,
-# 		category:'Entree',
-# 		description:'Homemade gnocci in a cream of fennel',
-# 		vegetarian:true,
-# 		gluten_free:true,
-# 		nut_free:false,
-# 		dairy_free:false,
-# 	},
-# 	{
-# 		name:'Creme Brulee',
-# 		price:12,
-# 		category:'Dessert',
-# 		description:'Tradition creme brulee',
-# 		vegetarian:true,
-# 		gluten_free:true,
-# 		nut_free:true,
-# 		dairy_free:false,
-# 	},
-# 	{
-# 		name:'Ice Cream Sundae',
-# 		price:11,
-# 		category:'Dessert',
-# 		description:'Vanilla ice cream with dark chocolate sauce topped with sour cherries',
-# 		vegetarian:true,
-# 		gluten_free:true,
-# 		nut_free:false,
-# 		dairy_free:false,
-# 	}
-# ].each do |food|
-# 	Food.create( food )
-# end
+# Populate foods table
+[
+	{
+		name:'French Onion Soup',
+		price:7,
+		category:'Appetizer',
+		description:'Onion soup with bread and melted cheese baked on top',
+		vegetarian:true,
+		gluten_free:false,
+		nut_free:true,
+		dairy_free:false,
+	},
+	{
+		name:'Pepper Crusted Ahi Tuna Salad',
+		price:13.50,
+		category:'Appetizer',
+		description:'Fresh greens with chopped tomatoes and peppers, pan seared pepper crusted tuna topped with a ginger-lime aioli',
+		vegetarian:false,
+		gluten_free:true,
+		nut_free:true,
+		dairy_free:true,
+	},
+	{
+		name:'Braised Oxtail Ravioli',
+		price:13.50,
+		category:'Appetizer',
+		description:'Homemade oxtail ravioli with brussels sprouts',
+		vegetarian:false,
+		gluten_free:false,
+		nut_free:true,
+		dairy_free:false,
+	},
+	{
+		name:'Duck Confit',
+		price:23,
+		category:'Entree',
+		description:'Confit duck leg with tumeric stewed fennel topped with a mango salsa',
+		vegetarian:false,
+		gluten_free:true,
+		nut_free:true,
+		dairy_free:true,
+	},
+	{
+		name:'Surf N Turf',
+		price:27,
+		category:'Entree',
+		description:'Pan seared pork tenderloin with seared scallops and a cauliflower mousse',
+		vegetarian:false,
+		gluten_free:true,
+		nut_free:false,
+		dairy_free:false,
+	},
+	{
+		name:'Gnocchi in Fennel Cream sauce',
+		price:21,
+		category:'Entree',
+		description:'Homemade gnocci in a cream of fennel',
+		vegetarian:true,
+		gluten_free:true,
+		nut_free:false,
+		dairy_free:false,
+	},
+	{
+		name:'Creme Brulee',
+		price:12,
+		category:'Dessert',
+		description:'Tradition creme brulee',
+		vegetarian:true,
+		gluten_free:true,
+		nut_free:true,
+		dairy_free:false,
+	},
+	{
+		name:'Ice Cream Sundae',
+		price:11,
+		category:'Dessert',
+		description:'Vanilla ice cream with dark chocolate sauce topped with sour cherries',
+		vegetarian:true,
+		gluten_free:true,
+		nut_free:false,
+		dairy_free:false,
+	}
+].each do |food|
+	Food.create( food )
+end
 
-# # Populate parties table
+# Populate parties table
 
-# [
-# 	{
-# 		people:4,
-# 		paid:false,
-# 		table_id:1,
-# 		employee_id:4,
-# 		tip:0
-# 	},
-# 	{
-# 		people:2,
-# 		paid:false,
-# 		table_id:2,
-# 		employee_id:3,
-# 		tip:0
-# 	},
-# 	{
-# 		people:5,
-# 		paid:false,
-# 		table_id:3,
-# 		employee_id:2,
-# 		tip:0
-# 	},
-# 	{
-# 		people:3,
-# 		paid:false,
-# 		table_id:4,
-# 		employee_id:1,
-# 		tip:0
-# 	}
-# ].each do |party|
-# 	Party.create( party )
-# end
+[
+	{
+		people:4,
+		paid:false,
+		table_id:1,
+		employee_id:4,
+		tip:0
+	},
+	{
+		people:2,
+		paid:false,
+		table_id:2,
+		employee_id:3,
+		tip:0
+	},
+	{
+		people:5,
+		paid:false,
+		table_id:3,
+		employee_id:2,
+		tip:0
+	},
+	{
+		people:3,
+		paid:false,
+		table_id:4,
+		employee_id:1,
+		tip:0
+	}
+].each do |party|
+	Party.create( party )
+end
 
-# # Populate employees table
+# Populate employees table
 
-# [
-# 	{
-# 		name:'Felix'
-# 	},
-# 	{
-# 		name:'Jessie'
-# 	},
-# 	{
-# 		name:'Claire'
-# 	},
-# 	{
-# 		name:'Kevin'
-# 	}
-# ].each do |employee|
-# 		Employee.create( employee )
-# end
+[
+	{
+		name:'Felix'
+	},
+	{
+		name:'Jessie'
+	},
+	{
+		name:'Claire'
+	},
+	{
+		name:'Kevin'
+	}
+].each do |employee|
+		Employee.create( employee )
+end
 
 # # Populate orders table
 
