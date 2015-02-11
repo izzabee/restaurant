@@ -2,12 +2,17 @@ source 'https://rubygems.org'
 
 # Database
 gem 'pg'
-gem 'sinatra-activerecord', require: 'sinatra/activerecord'
+
+# Model
+gem 'activerecord', require: 'active_record'
+gem 'activesupport', require: 'active_support/inflector'
+gem 'pg'
 
 # Sinatra
 gem 'sinatra', github: 'sinatra/sinatra'
 gem 'sinatra-contrib', require: 'sinatra/contrib/all'
 gem 'sinatra-reloader'
+gem 'sinatra-activerecord', require: 'sinatra/activerecord'
 
 # Style
 gem 'sass'
@@ -15,8 +20,8 @@ gem 'sass'
 # Utility
 gem 'pry'
 
-# Active support
-gem 'activesupport', require: 'active_support/inflector'
+# View
+gem 'compass'
 
 # Just like rackup, but better 
 gem 'unicorn'
