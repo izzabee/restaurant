@@ -8,7 +8,7 @@ ActiveRecord::Base.establish_connection({
     host: 'localhost', port: 5432
   })
 
-['models/concerns', 'models', 'helpers', 'controllers'].each do |component|
+['models', 'helpers', 'controllers'].each do |component|
   Dir["#{component}/*.rb"].sort.each do |file|
     require File.expand_path(file)
   end

@@ -1,20 +1,25 @@
 <div class="login">
 
 	<h2>Log In Here:</h2>
+	
+<!-- 	< % @employee.errors.full_messages.each do |message| %>
+	  <p class="error">< %= message %></p>
+	< % end %>
+ -->
+	<form action="/employees/login" method="post">
+	  <fieldset>
+	    <label for="employee_name">Name</label>
+	    <input type="text" id="employee_name" name="employee[name]" value="<%= @employee.name %>">
+	  </fieldset>
 
-	<form action="/employees" method="POST">
+	  <fieldset>
+	    <label for="employee_password">Password</label>
+	    <input type="password" id="employee_password" name="employee[password]">
+	  </fieldset>
 
-		<label for="employee_name">Name</label>
-		<select id="employee_name" name="employee_id">
-			<% @employees.each do |employee| %>
-				<option value="<%= employee.id %>"><%= employee.name %></option>
-			<% end %>
-		</select>
-
-		<!-- <label for="employee_password">Password</label>
-		<input id="employee_password" type="password" name="">
-		 -->
-		<input type="submit">
-
+	  <input type="submit" value="Log in">
 	</form>
+
 </div>
+
+<p>Not signed up yet? <a href="/signup">Click here to sign up</a> </p>

@@ -43,6 +43,8 @@ end
 # CREATE TABLE employees (
 # 	id SERIAL PRIMARY KEY,
 # 	name VARCHAR,
+# 	password VARCHAR,
+# 	authorization_token TEXT,
 # 	created_at TIMESTAMP,
 # 	updated_at TIMESTAMP
 # );
@@ -179,16 +181,20 @@ end
 
 [
 	{
-		name:'Felix'
+		name:'Felix',
+		password:123456
 	},
 	{
-		name:'Jessie'
+		name:'Jessie',
+		password:98765
 	},
 	{
-		name:'Claire'
+		name:'Claire',
+		password:'qwerty'
 	},
 	{
-		name:'Kevin'
+		name:'Kevin',
+		password:'poiuyt'
 	}
 ].each do |employee|
 		Employee.create( employee )

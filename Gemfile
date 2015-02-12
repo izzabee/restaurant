@@ -25,3 +25,6 @@ gem 'compass'
 
 # Just like rackup, but better 
 gem 'unicorn'
+
+# Security
+gem 'bcrypt'

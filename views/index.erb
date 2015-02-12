@@ -1,8 +1,16 @@
 <div class="homepage">
 
-	<h1>Welcome to Westing's</h1>
+	<h1>Welcome to Westing's <%= @employee.name %></h1>
+
+
 	<div class="chef">
 		<img src="/chef.png">
 	</div>
+
+	<form action="/employees/logout" method="post">
+	  <input type="hidden" value="delete" name="_method">
+	  <input type="submit" value="Log out!">
+	</form>
+
 	
 </div>

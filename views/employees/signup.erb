@@ -1,0 +1,26 @@
+<h2>Welcome, new employee!  Sign up below.</h2>
+<!-- 
+< % @employee.errors.full_messages.each do |message| %>
+  <p class="error">< %= message %></p>
+< % end %>
+ -->
+<form action="/employees/signup" method="post">
+  <fieldset>
+    <label for="employee_name">Name</label>
+    <input type="text" id="employee_name" name="employee[name]" >
+  </fieldset>
+
+  <fieldset>
+    <label for="employee_password">Password</label>
+    <input type="password" id="employee_password" name="employee[password]">
+  </fieldset>
+
+  <fieldset>
+    <label for="employee_password">Password Confirmation</label>
+    <input type="password" id="employee_password" name="employee[password_confirmation]">
+  </fieldset>
+
+  <input type="submit" value="Sign Up">
+</form>
+
+<p>Already in the system?<a href="/login">Click here to log in</a> </p>
